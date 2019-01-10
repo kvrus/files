@@ -37,7 +37,7 @@ def token_required(f):
         if not token:
             return jsonify({'message' : 'Token is missing!'}), 401
 
-        try: 
+        try:
             data = jwt.decode(token, app.config['SECRET_KEY'])
             current_user = User.query.filter_by(public_id=data['public_id']).first()
         except:
@@ -224,4 +224,4 @@ def delete_todo(current_user, todo_id):
     return jsonify({'message' : 'Todo item deleted!'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
